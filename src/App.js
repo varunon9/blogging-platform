@@ -3,10 +3,15 @@ import { Router } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 import AppRoutes from './containers/AppRoutes';
+import './css/main.css';
 
 const history = createBrowserHistory({
   basename: '/'
 });
+
+export const navigateToScreen = (path, props = {}) => {
+  history.push(path, { ...props });
+}
 
 function App() {
   return (

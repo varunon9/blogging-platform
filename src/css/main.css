@@ -1,0 +1,22 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+body {
+  margin: 0;
+}
+#root {
+  height: 100%;
+  width: 100%;
+}
+.container {
+  width: calc(100% - 32px);
+  height: calc(100% - 32px);
+  padding: 16px;
+}
+.center {
+  text-align: center;
+}
+.error {
+  color: red;
+}

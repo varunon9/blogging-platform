@@ -1,12 +1,23 @@
+import customLocalStorage from './customLocalStorage';
+
 const USER = 'user';
 
-const isLoggedIn = () => {
+export const isLoggedIn = () => {
   if (localStorage.getItem(USER)) {
     return true;
   }
   return false;
 };
 
-export {
-  isLoggedIn
+export const getAuthHeaderConfig = () => {
+  const user = customLocalStorage.getItem(USER);
+  const config = {
+    headers: {
+      Authorization: ''
+    }
+  };
+  if (user) {
+    config.headers.Authorization = `${user.loginData.id}`
+  }
+  return config;
 };
