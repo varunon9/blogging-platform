@@ -6,28 +6,21 @@ import '../../css/ArticlesMain.css';
 import { getArticles } from '../../actions/ApiClient';
 import customLocalStorage from '../../utils/customLocalStorage';
 
-class Articles extends React.Component {
+class ArticlesMain extends React.Component {
 
   constructor(props) {
     super(props);
     this.user = customLocalStorage.getItem('user');
     this.state = {
-      articles: [{content: '2', id: 2}, {content: '3', id: 3}]
+      articles: []
     };
   }
 
   componentDidMount() {
     getArticles()
-      /*.then(response => this.setState({
-        articles: [{content: '1', id: 1}, {content: '2', id: 2}, {content: '3', id: 3}]
-      }))*/
-      .then(response => {
-        setTimeout(() => {
-          this.setState({
-            articles: [{content: '1', id: 1}, {content: '2', id: 2}, {content: '3', id: 3}]
-          })
-        }, 5000);
-      })
+      .then(response => this.setState({
+        articles: response
+      }))
       .catch(error => console.log(error));
   }
 
@@ -72,4 +65,4 @@ class Articles extends React.Component {
   }
 }
 
-export default Articles;
+export default ArticlesMain;

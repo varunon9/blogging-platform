@@ -1,3 +1,7 @@
 .right.menu .item, .right.menu .item:hover {
   color: #4183c4 !important;
 }
+
+.mt12 {
+  margin-top: 12px !important;
+}

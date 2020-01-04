@@ -4,7 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
 import Profile from './Profile';
-import ArticlesMain from './articles/ArticlesMain';
+import ArticlesRoute from './articles/ArticlesRoute';
 import { isLoggedIn, logoutUser } from '../utils/auth';
 
 const renderComponent = (Component, authRequired) => {
@@ -32,7 +32,7 @@ class AppRoutes extends React.Component {
         <Route exact path="/signup" render={renderComponent(Signup, false)} />
         <Route exact path="/profile" render={renderComponent(Profile, true)} />
         <Route exact path="/logout" render={logout} />
-        <Route exact path="/articles" component={ArticlesMain} />
+        <Route path="/articles" component={ArticlesRoute} />
       </Switch>
     );
   }
