@@ -3,7 +3,7 @@ import customLocalStorage from './customLocalStorage';
 const USER = 'user';
 
 export const isLoggedIn = () => {
-  if (localStorage.getItem(USER)) {
+  if (customLocalStorage.getItem(USER)) {
     return true;
   }
   return false;
@@ -20,4 +20,8 @@ export const getAuthHeaderConfig = () => {
     config.headers.Authorization = `${user.loginData.id}`
   }
   return config;
+};
+
+export const logoutUser = () => {
+  customLocalStorage.removeItem(USER);
 };

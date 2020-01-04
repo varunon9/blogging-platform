@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import '../css/Login.css';
-import { loginUser } from '../actions/ApiClient';
+import { loginUser, getUser } from '../actions/ApiClient';
+import customLocalStorage from '../utils/customLocalStorage';
+import { navigateToScreen } from '../App';
 
 class Login extends React.Component {
   state = {
@@ -20,7 +22,7 @@ class Login extends React.Component {
       loginDataCopy[key] = value;
       this.setState({
         loginData: loginDataCopy
-      })
+      });
     }
   }
 
@@ -33,8 +35,22 @@ class Login extends React.Component {
           });
         } else {
           // login was successful, get user details now
-          const loginSuccessData = response;
-          // todo
+          const loginData = response;
+          getUser(loginData)
+            .then(response => {
+              const user = { ...response.data, loginData };
+
+              // save data to localstorage to persist it
+              customLocalStorage.setItem('user', user);
+
+              navigateToScreen('/articles');
+            })
+            .catch(error => {
+              this.setState({
+                errorMessage: error.message
+              });
+            });
+
         }
       })
       .catch(error => {

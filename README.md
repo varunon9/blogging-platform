@@ -72,3 +72,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 1. All folder names should be in lowercase
 2. All components name will start with capital letter
 3. Any css file for any component will have same name and inside css folder e.g. Signup.css for Signup.js
+4. All JS filenames will be in PascalCase

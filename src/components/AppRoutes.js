@@ -4,8 +4,8 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
 import Profile from './Profile';
-import Articles from './Articles';
-import { isLoggedIn } from '../utils/auth';
+import ArticlesMain from './articles/ArticlesMain';
+import { isLoggedIn, logoutUser } from '../utils/auth';
 
 const renderComponent = (Component, authRequired) => {
   return props => {
@@ -18,14 +18,21 @@ const renderComponent = (Component, authRequired) => {
   };
 };
 
+const logout = () => {
+  logoutUser();
+  return <Redirect to="/login" />;
+};
+
 class AppRoutes extends React.Component {
   render() {
     return (
       <Switch>
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/" render={() => <Redirect to="/articles" />} />
+        <Route exact path="/login"><Login /></Route>
         <Route exact path="/signup" render={renderComponent(Signup, false)} />
         <Route exact path="/profile" render={renderComponent(Profile, true)} />
-        <Route component={Articles} />
+        <Route exact path="/logout" render={logout} />
+        <Route exact path="/articles" component={ArticlesMain} />
       </Switch>
     );
   }
