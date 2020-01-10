@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = '/api'//'http://0cb8f47d.ngrok.io/api';
 
 const API_URLS = {
   GET_ARTICLES_DATA: BASE_URL + '/articles?filter[include]=customUser&filter[include][comments]=comments&filter[include][comments]=customUser',
@@ -12,6 +12,7 @@ const API_URLS = {
   ARTICLES: BASE_URL + '/articles',
   COMMENT_REPLIES: BASE_URL + '/comments/:commentId/?filter[include][comments]=customUser',
   CREATE_REPLY: BASE_URL + '/comments/:commentId/comments',
+  GET_ARTICLE_DATA: BASE_URL + '/articles/:articleId/?filter[include]=customUser&filter[include][comments]=comments&filter[include][comments]=customUser',
 };
 
 export const registerUser = data => {
@@ -60,4 +61,14 @@ export const getArticles = () => {
       .then(data => resolve(data))
       .catch(error => reject(error));
   });
+};
+
+export const getArticle = articleId => {
+  let url = API_URLS.GET_ARTICLE_DATA.replace(':articleId', articleId);
+  return axios.get(url);
+};
+
+export const getCommentReplies = commentId => {
+  const url = API_URLS.COMMENT_REPLIES.replace(':commentId', commentId);
+  return axios.get(url);
 };

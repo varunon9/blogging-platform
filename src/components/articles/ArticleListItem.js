@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { getFormattedDateText } from '../../utils';
 
 const ArticleListItem = props => {
-  const { article } = props;
+  const { article, user } = props;
 
   return (
     <div className="event mt12">
       <div className="content">
         <div className="summary">
-          <Link to={`/articles/${article.id}`}>{article.title}</Link>
+          <Link to={{ pathname: `/articles/${article.id}`, user, article }}>{article.title}</Link>
           <div className="date">
             { article.customUser.name } on
           </div>

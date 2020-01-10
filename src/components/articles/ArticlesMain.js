@@ -56,7 +56,7 @@ class ArticlesMain extends React.Component {
         <div className="ui feed">
           {
             articles.map((article, index) => (
-              <ArticleListItem key={article.id} article={article} />
+              <ArticleListItem key={article.id} article={article} user={user} />
             ))
           }
         </div>

@@ -5,3 +5,7 @@
 .mt12 {
   margin-top: 12px !important;
 }
+
+.comment-textarea {
+  max-height: 4em !important;
+}
