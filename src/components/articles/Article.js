@@ -40,9 +40,9 @@ const Article = function(props) {
         {
           user &&
             <form className="ui form">
-              <div class="field">
+              <div className="field">
                 <label>Your Comment</label>
-                <textarea placeholder="Start typing your comment..." class="comment-textarea">
+                <textarea placeholder="Start typing your comment..." className="comment-textarea">
                 </textarea>
               </div>
               <button className="ui primary mini button" type="submit">

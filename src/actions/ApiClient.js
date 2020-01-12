@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { getAuthHeaderConfig } from '../utils/auth';
+
 const BASE_URL = 'http://localhost:3001/api';
 
 const API_URLS = {
@@ -71,4 +73,9 @@ export const getArticle = articleId => {
 export const getCommentReplies = commentId => {
   const url = API_URLS.COMMENT_REPLIES.replace(':commentId', commentId);
   return axios.get(url);
+};
+
+export const createArticle = data => {
+  const url = API_URLS.ARTICLES;
+  return axios.post(url, data, getAuthHeaderConfig());
 };

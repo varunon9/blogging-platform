@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { getFormattedDateText } from '../../utils/';
 import { getCommentReplies } from '../../actions/ApiClient';
+import ArticleReply from './ArticleReply';
 
 const ArticleComment = props => {
   const { comment, user } = props;
@@ -32,27 +33,11 @@ const ArticleComment = props => {
         {
           repliedComments.map(reply => {
             return (
-              <div className="ui comments" key={reply.id}>
-                <div className="comment">
-                  <div className="content">
-                    <span className="author">
-                      {reply.customUser ? reply.customUser.name : 'NA'}
-                    </span>
-                    <div className="metadata">
-                      <span className="date">{ getFormattedDateText(reply.createdAt) }</span>
-                      {
-                        isUserCommentAuthor(reply) &&
-                          <button className="ui icon mini button">
-                            <i className="edit icon"></i>
-                          </button>
-                      }
-                    </div>
-                    <div className="text">
-                      { reply.content }
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ArticleReply 
+                key={reply.id}
+                isUserCommentAuthor={isUserCommentAuthor}
+                reply={reply}
+              />
             )
           })
         }
@@ -62,10 +47,10 @@ const ArticleComment = props => {
               <form className="ui form">
                 <div className="field">
                   <label>Your Reply</label>
-                  <textarea placeholder="Your reply goes here..." class="comment-textarea">
+                  <textarea placeholder="Your reply goes here..." className="comment-textarea">
                   </textarea>
                 </div>
-                <button class="ui secondary mini button" type="submit">
+                <button className="ui secondary mini button" type="submit">
                   Submit
                 </button>
               </form>
