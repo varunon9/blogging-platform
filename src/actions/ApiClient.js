@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = '/api'//'http://0cb8f47d.ngrok.io/api';
+const BASE_URL = 'http://localhost:3001/api';
 
 const API_URLS = {
   GET_ARTICLES_DATA: BASE_URL + '/articles?filter[include]=customUser&filter[include][comments]=comments&filter[include][comments]=customUser',

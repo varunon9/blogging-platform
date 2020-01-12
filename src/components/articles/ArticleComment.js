@@ -32,12 +32,12 @@ const ArticleComment = props => {
         {
           repliedComments.map(reply => {
             return (
-              <div className="ui comments">
+              <div className="ui comments" key={reply.id}>
                 <div className="comment">
                   <div className="content">
-                    <a className="author">
+                    <span className="author">
                       {reply.customUser ? reply.customUser.name : 'NA'}
-                    </a>
+                    </span>
                     <div className="metadata">
                       <span className="date">{ getFormattedDateText(reply.createdAt) }</span>
                       {
@@ -78,9 +78,9 @@ const ArticleComment = props => {
   return (
     <div className="comment">
       <div className="content">
-        <a className="author">
+        <span className="author">
           {comment.customUser ? comment.customUser.name : 'NA'}
-        </a>
+        </span>
         <div className="metadata">
           <span className="date">{ getFormattedDateText(comment.createdAt) }</span>
           {
