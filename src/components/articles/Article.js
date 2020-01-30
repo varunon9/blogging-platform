@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { getArticle } from '../../actions/ApiClient';
 import ArticleComment from './ArticleComment';
+import ArticleReplyOrCommentForm from './ArticleReplyOrCommentForm';
 
 const Article = function(props) {
   const { user } = props.location;
@@ -39,16 +40,7 @@ const Article = function(props) {
         </div>
         {
           user &&
-            <form className="ui form">
-              <div className="field">
-                <label>Your Comment</label>
-                <textarea placeholder="Start typing your comment..." className="comment-textarea">
-                </textarea>
-              </div>
-              <button className="ui primary mini button" type="submit">
-                Submit
-              </button>
-            </form>
+            <ArticleReplyOrCommentForm article={article} isReply={false} />
         }
       </div>
     );
