@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
 
 import { getFormattedDateText } from '../../utils/';
-import { getCommentReplies } from '../../actions/ApiClient';
+import { getCommentReplies, createReply } from '../../actions/ApiClient';
 import ArticleReply from './ArticleReply';
+import { navigateToScreen } from '../../App';
 
 const ArticleComment = props => {
   const { comment, user } = props;
 
   const [repliedComments, setRepliedComments] = useState(comment.comments);
   const [showReplies, setShowReplies] = useState(false);
+  const [userReply, setUserReply] = useState({
+    content: ''
+  });
 
   const isUserCommentAuthor = comment => {
     return user && comment.userId === user.id;
+  };
+
+  const onReplyContentChange = e => {
+    const value = e.target.value;
+    setUserReply({ content: value });
   };
 
   const onRepliesButtonClick = () => {
@@ -25,6 +34,17 @@ const ArticleComment = props => {
       .catch(error => {
         console.log(error);
       })
+  };
+
+  const onSubmitReplyButtonClick = e => {
+    e.preventDefault();
+    createReply(comment.id, userReply)
+      .then(response => {
+        navigateToScreen('/articles');
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   const showRepliedComments = () => {
@@ -47,10 +67,17 @@ const ArticleComment = props => {
               <form className="ui form">
                 <div className="field">
                   <label>Your Reply</label>
-                  <textarea placeholder="Your reply goes here..." className="comment-textarea">
+                  <textarea 
+                    placeholder="Your reply goes here..." 
+                    className="comment-textarea"
+                    onChange={onReplyContentChange}
+                    value={userReply.content}
+                  >
                   </textarea>
                 </div>
-                <button className="ui secondary mini button" type="submit">
+                <button className="ui secondary mini button" 
+                  type="submit" onClick={onSubmitReplyButtonClick}
+                >
                   Submit
                 </button>
               </form>
