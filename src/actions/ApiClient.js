@@ -89,3 +89,8 @@ export const createArticleComment = (articleId, data) => {
   const url = API_URLS.CREATE_ARTICLE_COMMENT.replace(':articleId', articleId);
   return axios.post(url, data, getAuthHeaderConfig());
 };
+
+export const patchComment = (commentId, data) => {
+  const url = API_URLS.PATCH_COMMENT.replace(':commentId', commentId);
+  return axios.patch(url, data, getAuthHeaderConfig());
+};

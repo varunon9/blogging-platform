@@ -3,12 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { getArticle } from '../../actions/ApiClient';
 import ArticleComment from './ArticleComment';
 import ArticleReplyOrCommentForm from './ArticleReplyOrCommentForm';
+import EditCommentOrReplyModal from './EditCommentOrReplyModal';
 
 const Article = function(props) {
   const { user } = props.location;
   const articleId = props.match.params.id; // matched to path={`${matchedPath}/:id`}
 
   const [article, setArticle] = useState(props.location.article);
+  const [editModalData, setEditModalData] = useState({
+    visible: false,
+    replyOrComment: {}
+  });
 
   useEffect(() => {
     if (!article) {
@@ -23,6 +28,22 @@ const Article = function(props) {
     }
   }, []);
 
+  const onEditReplyOrCommentClicked = replyOrComment => {
+    return e => {
+      e.preventDefault();
+      setEditModalData({
+        visible: true,
+        replyOrComment
+      });
+    }
+  };
+
+  const closeEditReplyOrCommentModal = () => {
+    setEditModalData({
+      visible: false
+    });
+  };
+
   const renderArticle = article => {
     return (
       <div>
@@ -34,7 +55,10 @@ const Article = function(props) {
           <h3 className="ui dividing header">Comments</h3>
           {
             article.comments.map(comment => {
-              return <ArticleComment key={comment.id} comment={comment} user={user} />
+              return <ArticleComment 
+                key={comment.id} comment={comment} user={user}
+                onEditReplyOrCommentClicked={onEditReplyOrCommentClicked} 
+              />
             })
           }
         </div>
@@ -60,6 +84,13 @@ const Article = function(props) {
             </div>
         }
       </div>
+      { 
+        editModalData.visible && 
+          <EditCommentOrReplyModal 
+            replyOrComment={editModalData.replyOrComment} 
+            closeModal={closeEditReplyOrCommentModal}
+          />
+      }
     </div>
   );
 };

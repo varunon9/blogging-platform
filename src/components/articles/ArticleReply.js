@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { getFormattedDateText } from '../../utils/';
 
 const ArticleReply = props => {
-  const { reply, isUserCommentAuthor, onEditReplyClicked } = props;
+  const { reply, isUserCommentAuthor, onEditReplyOrCommentClicked } = props;
 
   return (
     <div className="ui comments" key={reply.id}>
@@ -17,7 +17,7 @@ const ArticleReply = props => {
             <span className="date">{ getFormattedDateText(reply.createdAt) }</span>
             {
               isUserCommentAuthor(reply) &&
-                <button className="ui icon mini button">
+                <button className="ui icon mini button" onClick={onEditReplyOrCommentClicked(reply)}>
                   <i className="edit icon"></i>
                 </button>
             }
@@ -34,7 +34,7 @@ const ArticleReply = props => {
 ArticleReply.propTypes = {
   reply: PropTypes.object.isRequired,
   isUserCommentAuthor: PropTypes.func.isRequired,
-  onEditReplyClicked: PropTypes.func.isRequired
+  onEditReplyOrCommentClicked: PropTypes.func.isRequired
 };
 
 export default ArticleReply;
