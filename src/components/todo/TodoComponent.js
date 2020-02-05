@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 
-import { addTodoItem } from './todoActions';
+import { addTodoItem, asyncAddTodoItem } from './todoActions';
 import TodoListItem from './TodoListItem';
 
 const TodoComponent = props => {
@@ -51,12 +51,31 @@ const mapStateToProps = state => {
   }
 };
 
-const mapDispatchToProps = dispatch => {
+// mapDispatchToProps can be function, 
+// in this case it will accept dispatch as a first argument
+/*const mapDispatchToProps = dispatch => {
   return {
     addTodoItem: todoText => {
-      addTodoItem(dispatch, todoText);
+      dispatch(addTodoItem(todoText));
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoComponent);*/
+
+// mapDispatchToProps can also be an object
+// in this case connect will automatically dispatch actions
+export default connect(mapStateToProps, { addTodoItem })(TodoComponent);
+
+// To perform async actions, you can pass dispatch to action creators
+/*const mapDispatchToProps = dispatch => {
+  return {
+    addTodoItem: todoText => {
+      asyncAddTodoItem(dispatch, todoText);
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoComponent);*/
+
+// reference: https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#35415559

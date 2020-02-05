@@ -2,7 +2,7 @@ import { ADD_TODO_ITEM } from './todoTypes';
 
 let id = 1; // keep incrementing it
 
-export const addTodoItem = (dispatch, todoText) => {
+export const addTodoItem = todoText => {
   const action = {
     type: ADD_TODO_ITEM,
     payload: {
@@ -11,5 +11,19 @@ export const addTodoItem = (dispatch, todoText) => {
       done: false
     }
   };
-  dispatch(action);
+  return action;
+};
+
+export const asyncAddTodoItem = (dispatch, todoText) => {
+  const action = {
+    type: ADD_TODO_ITEM,
+    payload: {
+      text: todoText,
+      id: id++,
+      done: false
+    }
+  };
+  setTimeout(() => {
+    dispatch(action);
+  }, 100);
 };
