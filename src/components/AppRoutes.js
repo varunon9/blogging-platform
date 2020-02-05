@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
 import Profile from './Profile';
+import TodoMain from './todo/TodoMain';
 import ArticlesRoute from './articles/ArticlesRoute';
 import { isLoggedIn, logoutUser } from '../utils/auth';
 
@@ -33,6 +34,7 @@ class AppRoutes extends React.Component {
         <Route exact path="/profile" render={renderComponent(Profile, true)} />
         <Route exact path="/logout" render={logout} />
         <Route path="/articles" component={ArticlesRoute} />
+        <Route exat path="/todo" component={TodoMain} />
       </Switch>
     );
   }
